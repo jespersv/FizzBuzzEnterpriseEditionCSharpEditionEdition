@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="FBEECSEE.Library/FBEECSEE.Library.csproj" />
   <Project Path="FBEECSEE.Presentation/FBEECSEE.Presentation.csproj" />
 </Solution>

@@ -5,13 +5,6 @@ multiples of 5 with "Buzz," and multiples of both with "FizzBuzz".
 The core logic checks if a number is divisible by 3 and 5.
 */
 
-using Autofac;
-using FBEECSEE.Presentation;
-using FBEECSEE.Presentation.interfaces;
+using FBEECSEE.Library;
 
-var builder = new ContainerBuilder();
-builder.RegisterModule<FizzBuzzModule>();
-var container = builder.Build();
-var service = container.Resolve<IFizzBuzzService>();
-
-await service.Run();
+await FBEECSEEHostService.Instance.Run();
