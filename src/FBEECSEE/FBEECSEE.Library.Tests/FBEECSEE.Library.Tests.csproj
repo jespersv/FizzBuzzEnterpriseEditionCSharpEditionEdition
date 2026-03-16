@@ -18,8 +18,4 @@
     <ProjectReference Include="..\FBEECSEE.Library\FBEECSEE.Library.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="impl\" />
-  </ItemGroup>
-
 </Project>
