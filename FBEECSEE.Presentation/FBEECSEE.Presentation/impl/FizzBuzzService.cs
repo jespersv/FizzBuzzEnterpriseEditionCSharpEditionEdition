@@ -1,13 +1,23 @@
-﻿public class FizzBuzzService : IFizzBuzzService
+﻿using FBEECSEE.Presentation.interfaces;
+
+namespace FBEECSEE.Presentation.impl;
+
+internal class FizzBuzzService : IFizzBuzzService
 {
-    public async Task Run()
+    private readonly ILoopEnumerationFactory _loopEnumerationFactory;
+    private readonly ILoopLogicService _loopLogicService;
+
+    public FizzBuzzService(ILoopEnumerationFactory loopEnumerationFactory, ILoopLogicService loopLogicService)
     {
-        for (var i = 1; i < 101; i++)
-        {
-            if (i % 3 == 0 && i % 5 == 0) Console.WriteLine($"FizzBuzz");
-            else if (i % 3 == 0) Console.WriteLine($"Fizz");
-            else if (i % 5 == 0) Console.WriteLine($"Buzz");
-            else Console.WriteLine(i);
-        }
+        _loopEnumerationFactory = loopEnumerationFactory;
+        _loopLogicService = loopLogicService;
+    }
+
+    public Task Run()
+    {
+        var loopEnumeration = _loopEnumerationFactory.CreateLoopEnumeration();
+        _loopLogicService.RunLoop(loopEnumeration);
+
+        return Task.CompletedTask;
     }
 }

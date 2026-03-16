@@ -6,6 +6,8 @@ The core logic checks if a number is divisible by 3 and 5.
 */
 
 using Autofac;
+using FBEECSEE.Presentation;
+using FBEECSEE.Presentation.interfaces;
 
 var builder = new ContainerBuilder();
 builder.RegisterModule<FizzBuzzModule>();
