@@ -20,10 +20,8 @@ public class FizzBuzzModule : Module
         builder.RegisterTypeInstancePerLifetimeScope<LoopEnumerationFactory, ILoopEnumerationFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<LoopEvaluationFactory, ILoopEvaluationFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<LoopLogicFactory, ILoopLogicFactory>();
-        builder.RegisterTypeInstancePerLifetimeScope<LoopLogicFactory, ILoopLogicFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<LoopLogicService, ILoopLogicService>();
         builder.RegisterTypeInstancePerLifetimeScope<ModulusCompareService, IModulusCompareService>();
-        builder.RegisterTypeInstancePerLifetimeScope<ModulusService, IModulusService>();
         builder.RegisterTypeInstancePerLifetimeScope<ModulusService, IModulusService>();
     }
 }
