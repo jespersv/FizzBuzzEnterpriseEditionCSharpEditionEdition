@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/tests/">
+    <Project Path="FBEECSEE.Library.Tests/FBEECSEE.Library.Tests.csproj" />
+  </Folder>
   <Project Path="FBEECSEE.Library/FBEECSEE.Library.csproj" />
   <Project Path="FBEECSEE.Presentation/FBEECSEE.Presentation.csproj" />
 </Solution>
