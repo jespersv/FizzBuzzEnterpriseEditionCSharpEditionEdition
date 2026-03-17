@@ -4,14 +4,14 @@ using NUnit.Framework;
 namespace FBEECSEE.Library.Tests.impl;
 
 [TestFixture]
-public class ModulusServiceTests
+public class ModulusOperatorTests
 {
-    private ModulusService _cut = null!;
+    private ModulusOperator _cut = null!;
 
     [SetUp]
     public void SetUp()
     {
-        _cut = new ModulusService();
+        _cut = new ModulusOperator();
     }
 
     [TestCase(10, 3, 1)]

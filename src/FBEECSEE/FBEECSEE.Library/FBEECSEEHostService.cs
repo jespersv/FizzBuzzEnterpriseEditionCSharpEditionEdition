@@ -22,9 +22,11 @@ public class FBEECSEEHostService
         Instance = new FBEECSEEHostService(container);
     }
 
-    public async Task Run()
+    public Task Run()
     {
         var service = _container.Resolve<IFizzBuzzService>();
-        await service.Run();
+        service.Run();
+
+        return Task.CompletedTask;
     }
 }

@@ -2,5 +2,5 @@
 
 internal interface IModulusCompareService
 {
-    bool Check(int value, int fizzbuzzValue, int modulusCompareValue);
+    bool Check(int value, int modulus, int modulusCompareValue);
 }

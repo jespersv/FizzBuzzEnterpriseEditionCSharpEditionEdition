@@ -2,5 +2,5 @@
 
 public interface IFizzBuzzService
 {
-    Task Run();
+    void Run();
 }

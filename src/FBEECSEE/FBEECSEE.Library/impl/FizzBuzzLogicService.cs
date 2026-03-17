@@ -12,18 +12,9 @@ internal class FizzBuzzLogicService : IFizzBuzzLogicService
         _logicMapperFactory = logicMapperFactory.CreateMapper();
     }
 
-    public Func<bool> GetEval(FizzBuzzEnum en, int value)
-    {
-        return () => _logicMapperFactory[en].eval(value);
-    }
+    public Func<bool> GetEval(FizzBuzzEnum en, int value) => () => _logicMapperFactory[en].eval(value);
 
-    public Action GetResult(FizzBuzzEnum en)
-    {
-        return () => _logicMapperFactory[en].result(default);
-    }
+    public Action GetResult(FizzBuzzEnum en) => () => _logicMapperFactory[en].result(default);
 
-    public Action GetResult(FizzBuzzEnum en, int value)
-    {
-        return () => _logicMapperFactory[en].result(value);
-    }
+    public Action GetResult(FizzBuzzEnum en, int value) => () => _logicMapperFactory[en].result(value);
 }

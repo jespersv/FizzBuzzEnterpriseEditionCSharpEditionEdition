@@ -4,18 +4,18 @@ namespace FBEECSEE.Library.impl;
 
 internal class ModulusCompareService : IModulusCompareService
 {
-    private readonly IModulusService _modulusService;
+    private readonly IModulusOperator _modulusOperator;
     private readonly IEquateService _equateService;
 
-    public ModulusCompareService(IModulusService modulusService, IEquateService equateService)
+    public ModulusCompareService(IModulusOperator modulusOperator, IEquateService equateService)
     {
-        _modulusService = modulusService;
+        _modulusOperator = modulusOperator;
         _equateService = equateService;
     }
 
-    public bool Check(int value, int fizzbuzzValue, int modulusCompareValue)
+    public bool Check(int value, int modulus, int modulusCompareValue)
     {
-        var modalResult = _modulusService.Eval(value, fizzbuzzValue);
-        return _equateService.AreEqual(modalResult, Constants.MODULE_FIZZBUZZ_SHOULD_EQUAL);
+        var modalResult = _modulusOperator.Eval(value, modulus);
+        return _equateService.AreEqual(modalResult, modulusCompareValue);
     }
 }

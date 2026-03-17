@@ -13,11 +13,9 @@ internal class FizzBuzzService : IFizzBuzzService
         _loopLogicService = loopLogicService;
     }
 
-    public Task Run()
+    public void Run()
     {
         var loopEnumeration = _loopEnumerationFactory.CreateLoopEnumeration();
         _loopLogicService.RunLoop(loopEnumeration);
-
-        return Task.CompletedTask;
     }
 }

@@ -22,6 +22,6 @@ public class FizzBuzzModule : Module
         builder.RegisterTypeInstancePerLifetimeScope<LoopLogicFactory, ILoopLogicFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<LoopLogicService, ILoopLogicService>();
         builder.RegisterTypeInstancePerLifetimeScope<ModulusCompareService, IModulusCompareService>();
-        builder.RegisterTypeInstancePerLifetimeScope<ModulusService, IModulusService>();
+        builder.RegisterTypeInstancePerLifetimeScope<ModulusOperator, IModulusOperator>();
     }
 }

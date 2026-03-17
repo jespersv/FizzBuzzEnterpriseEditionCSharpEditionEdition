@@ -21,14 +21,14 @@ public class FizzBuzzServiceTests
     }
 
     [Test]
-    public async Task Run_CreatesEnumerationAndExecutesLoopLogic()
+    public void Run_CreatesEnumerationAndExecutesLoopLogic()
     {
         var values = new[] { 1, 2, 3 };
         IEnumerable<int>? capturedEnumeration = null;
         _loopEnumerationFactoryMock.Setup(x => x.CreateLoopEnumeration()).Returns(values);
         _loopLogicServiceMock.Setup(x => x.RunLoop(It.IsAny<IEnumerable<int>>())).Callback<IEnumerable<int>>(v => capturedEnumeration = v);
 
-        await _cut.Run();
+        _cut.Run();
 
         Assert.That(capturedEnumeration, Is.EqualTo(values));
     }

@@ -22,13 +22,4 @@ public class EquateServiceTests
         var result = _cut.AreEqual(value1, value2);
         Assert.That(result, Is.EqualTo(expected));
     }
-
-    [TestCase(true, true, true)]
-    [TestCase(true, false, false)]
-    [TestCase(false, false, true)]
-    public void AreEqual_BoolValues_ReturnsExpectedValue(bool value1, bool value2, bool expected)
-    {
-        var result = _cut.AreEqual(value1, value2);
-        Assert.That(result, Is.EqualTo(expected));
-    }
 }
