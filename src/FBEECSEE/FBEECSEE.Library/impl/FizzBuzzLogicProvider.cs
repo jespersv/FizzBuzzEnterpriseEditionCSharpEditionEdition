@@ -3,11 +3,11 @@ using FBEECSEE.Library.interfaces;
 
 namespace FBEECSEE.Library.impl;
 
-internal class FizzBuzzLogicService : IFizzBuzzLogicService
+internal class FizzBuzzLogicProvider : IFizzBuzzLogicProvider
 {
     private readonly Dictionary<FizzBuzzEnum, EvaluationActionBinding<int>> _logicMapperFactory;
 
-    public FizzBuzzLogicService(IFizzBuzzLogicMapperFactory logicMapperFactory)
+    public FizzBuzzLogicProvider(IFizzBuzzLogicMapperFactory logicMapperFactory)
     {
         _logicMapperFactory = logicMapperFactory.CreateMapper();
     }

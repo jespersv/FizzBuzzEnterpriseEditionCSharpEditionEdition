@@ -7,10 +7,10 @@ using NUnit.Framework;
 namespace FBEECSEE.Library.Tests.impl;
 
 [TestFixture]
-public class FizzBuzzLogicServiceTests
+public class FizzBuzzLogicProviderTests
 {
     private Mock<IFizzBuzzLogicMapperFactory> _logicMapperFactoryMock = null!;
-    private FizzBuzzLogicService _cut = null!;
+    private FizzBuzzLogicProvider _cut = null!;
 
     [SetUp]
     public void SetUp()
@@ -30,7 +30,7 @@ public class FizzBuzzLogicServiceTests
             { FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => { }) }
         };
         _logicMapperFactoryMock.Setup(x => x.CreateMapper()).Returns(mapper);
-        _cut = new FizzBuzzLogicService(_logicMapperFactoryMock.Object);
+        _cut = new FizzBuzzLogicProvider(_logicMapperFactoryMock.Object);
 
         var eval = _cut.GetEval(FizzBuzzEnum.Fizz, 11);
         var result = eval();
@@ -51,7 +51,7 @@ public class FizzBuzzLogicServiceTests
             { FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => { }) }
         };
         _logicMapperFactoryMock.Setup(x => x.CreateMapper()).Returns(mapper);
-        _cut = new FizzBuzzLogicService(_logicMapperFactoryMock.Object);
+        _cut = new FizzBuzzLogicProvider(_logicMapperFactoryMock.Object);
 
         var action = _cut.GetResult(FizzBuzzEnum.Fizz);
         action();
@@ -71,7 +71,7 @@ public class FizzBuzzLogicServiceTests
             { FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_ => true, value => seenValue = value) }
         };
         _logicMapperFactoryMock.Setup(x => x.CreateMapper()).Returns(mapper);
-        _cut = new FizzBuzzLogicService(_logicMapperFactoryMock.Object);
+        _cut = new FizzBuzzLogicProvider(_logicMapperFactoryMock.Object);
 
         var action = _cut.GetResult(FizzBuzzEnum.NoFizzBuzz, 42);
         action();

@@ -8,7 +8,7 @@ namespace FBEECSEE.Library.Tests;
 
 #pragma warning disable CS8618
 [TestFixture]
-public class FizzBuzzModuleTests
+public class FbeecseeModuleTests
 {
     private IContainer _container;
 
@@ -16,7 +16,7 @@ public class FizzBuzzModuleTests
     public void Setup()
     {
         var builder = new ContainerBuilder();
-        builder.RegisterModule<FizzBuzzModule>();
+        builder.RegisterModule<Module>();
         _container = builder.Build();
     }
 

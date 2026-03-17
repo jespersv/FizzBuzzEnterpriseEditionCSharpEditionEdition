@@ -2,7 +2,7 @@
 
 namespace FBEECSEE.Library.interfaces;
 
-internal interface IFizzBuzzLogicService
+internal interface IFizzBuzzLogicProvider
 {
     Func<bool> GetEval(FizzBuzzEnum en, int value);
 

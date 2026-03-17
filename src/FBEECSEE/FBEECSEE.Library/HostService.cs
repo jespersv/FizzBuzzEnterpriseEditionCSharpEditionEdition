@@ -3,23 +3,23 @@ using FBEECSEE.Library.interfaces;
 
 namespace FBEECSEE.Library;
 
-public class FBEECSEEHostService
+public class HostService
 {
     private readonly IContainer _container;
 
-    public FBEECSEEHostService(IContainer container)
+    public HostService(IContainer container)
     {
         _container = container;
     }
 
-    public static FBEECSEEHostService Instance { get; }
+    public static HostService Instance { get; }
 
-    static FBEECSEEHostService()
+    static HostService()
     {
         var builder = new ContainerBuilder();
-        builder.RegisterModule<FizzBuzzModule>();
+        builder.RegisterModule<Module>();
         var container = builder.Build();
-        Instance = new FBEECSEEHostService(container);
+        Instance = new HostService(container);
     }
 
     public Task Run()

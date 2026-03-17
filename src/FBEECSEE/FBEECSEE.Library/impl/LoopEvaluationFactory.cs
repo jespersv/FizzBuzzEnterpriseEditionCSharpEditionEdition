@@ -5,9 +5,9 @@ namespace FBEECSEE.Library.impl;
 
 internal class LoopEvaluationFactory : ILoopEvaluationFactory
 {
-    private readonly IFizzBuzzLogicService _logicMap;
+    private readonly IFizzBuzzLogicProvider _logicMap;
 
-    public LoopEvaluationFactory(IFizzBuzzLogicService logicMap)
+    public LoopEvaluationFactory(IFizzBuzzLogicProvider logicMap)
     {
         _logicMap = logicMap;
     }

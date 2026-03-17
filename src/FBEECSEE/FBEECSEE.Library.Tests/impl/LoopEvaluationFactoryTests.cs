@@ -8,13 +8,13 @@ namespace FBEECSEE.Library.Tests.impl;
 [TestFixture]
 public class LoopEvaluationFactoryTests
 {
-    private Mock<IFizzBuzzLogicService> _logicServiceMock = null!;
+    private Mock<IFizzBuzzLogicProvider> _logicServiceMock = null!;
     private LoopEvaluationFactory _cut = null!;
 
     [SetUp]
     public void SetUp()
     {
-        _logicServiceMock = new Mock<IFizzBuzzLogicService>();
+        _logicServiceMock = new Mock<IFizzBuzzLogicProvider>();
         _cut = new LoopEvaluationFactory(_logicServiceMock.Object);
     }
 

@@ -5,7 +5,7 @@ using FBEECSEE.Library.util;
 
 namespace FBEECSEE.Library;
 
-public class FizzBuzzModule : Module
+public class Module : Autofac.Module
 {
     protected override void Load(ContainerBuilder builder)
     {
@@ -14,7 +14,7 @@ public class FizzBuzzModule : Module
         builder.RegisterTypeInstancePerLifetimeScope<EquateService, IEquateService>();
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicFactory, IFizzBuzzLogicFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicMapperFactory, IFizzBuzzLogicMapperFactory>();
-        builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicService, IFizzBuzzLogicService>();
+        builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicProvider, IFizzBuzzLogicProvider>();
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzService, IFizzBuzzService>();
         builder.RegisterTypeInstancePerLifetimeScope<LogicOutputFactory, ILogicOutputFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<LoopEnumerationFactory, ILoopEnumerationFactory>();
