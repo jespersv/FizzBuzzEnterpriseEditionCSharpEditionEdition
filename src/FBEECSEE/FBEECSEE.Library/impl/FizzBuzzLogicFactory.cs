@@ -13,9 +13,9 @@ internal class FizzBuzzLogicFactory : IFizzBuzzLogicFactory
         _andOperator = andOperator;
     }
 
-    public bool FizzBuzzEvalLogic(int value) => _andOperator.And(FizzEvalLogic(value), BuzzEvalLogic(value));
+    public bool FizzBuzzLogic(int value) => _andOperator.And(FizzLogic(value), BuzzLogic(value));
 
-    public bool FizzEvalLogic(int value) => _modulusCompareService.Check(value, Constants.FIZZVALUE, Constants.MODULE_FIZZBUZZ_SHOULD_EQUAL);
+    public bool FizzLogic(int value) => _modulusCompareService.Check(value, Constants.FIZZVALUE, Constants.MODULE_FIZZBUZZ_SHOULD_EQUAL);
 
-    public bool BuzzEvalLogic(int value) => _modulusCompareService.Check(value, Constants.BUZZVALUE, Constants.MODULE_FIZZBUZZ_SHOULD_EQUAL);
+    public bool BuzzLogic(int value) => _modulusCompareService.Check(value, Constants.BUZZVALUE, Constants.MODULE_FIZZBUZZ_SHOULD_EQUAL);
 }

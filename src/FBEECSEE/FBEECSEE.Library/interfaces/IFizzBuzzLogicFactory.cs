@@ -2,9 +2,9 @@
 
 internal interface IFizzBuzzLogicFactory
 {
-    bool FizzBuzzEvalLogic(int value);
+    bool FizzBuzzLogic(int value);
 
-    bool FizzEvalLogic(int value);
+    bool FizzLogic(int value);
 
-    bool BuzzEvalLogic(int value);
+    bool BuzzLogic(int value);
 }

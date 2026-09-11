@@ -8,16 +8,16 @@ namespace FBEECSEE.Library.Tests.impl;
 [TestFixture]
 public class FizzBuzzLogicMapperFactoryTests
 {
-    private Mock<IFizzBuzzLogicFactory> _fizzBuzzLogicFactoryMock = null!;
+    private Mock<IFizzBuzzLogicEvaluationFactory> _fizzBuzzLogicEvaluationFactoryMock = null!;
     private Mock<ILogicOutputFactory> _logicOutputFactoryMock = null!;
     private FizzBuzzLogicMapperFactory _cut = null!;
 
     [SetUp]
     public void SetUp()
     {
-        _fizzBuzzLogicFactoryMock = new Mock<IFizzBuzzLogicFactory>();
+        _fizzBuzzLogicEvaluationFactoryMock = new Mock<IFizzBuzzLogicEvaluationFactory>();
         _logicOutputFactoryMock = new Mock<ILogicOutputFactory>();
-        _cut = new FizzBuzzLogicMapperFactory(_fizzBuzzLogicFactoryMock.Object, _logicOutputFactoryMock.Object);
+        _cut = new FizzBuzzLogicMapperFactory(_fizzBuzzLogicEvaluationFactoryMock.Object, _logicOutputFactoryMock.Object);
     }
 
     [Test]
@@ -29,10 +29,10 @@ public class FizzBuzzLogicMapperFactoryTests
     }
 
     [Test]
-    public void CreateMapper_FizzBuzzBinding_UsesFizzBuzzFactoryAndOutput()
+    public void CreateMapper_FizzBuzzBinding_UsesFizzBuzzEvaluationFactoryAndOutput()
     {
         var outputCallCount = 0;
-        _fizzBuzzLogicFactoryMock.Setup(x => x.FizzBuzzEvalLogic(15)).Returns(true);
+        _fizzBuzzLogicEvaluationFactoryMock.Setup(x => x.FizzBuzzEvaluation(15)).Returns(true);
         _logicOutputFactoryMock.Setup(x => x.FizzBuzzOutput(15)).Callback(() => outputCallCount++);
         var mapper = _cut.CreateMapper();
 
@@ -44,12 +44,12 @@ public class FizzBuzzLogicMapperFactoryTests
     }
 
     [Test]
-    public void CreateMapper_FizzAndBuzzBindings_UseMatchingFactoryAndOutput()
+    public void CreateMapper_FizzAndBuzzBindings_UseMatchingEvaluationFactoryAndOutput()
     {
         var fizzCalls = 0;
         var buzzCalls = 0;
-        _fizzBuzzLogicFactoryMock.Setup(x => x.FizzEvalLogic(9)).Returns(true);
-        _fizzBuzzLogicFactoryMock.Setup(x => x.BuzzEvalLogic(10)).Returns(true);
+        _fizzBuzzLogicEvaluationFactoryMock.Setup(x => x.FizzEvaluation(9)).Returns(true);
+        _fizzBuzzLogicEvaluationFactoryMock.Setup(x => x.BuzzEvaluation(10)).Returns(true);
         _logicOutputFactoryMock.Setup(x => x.FizzOutput(9)).Callback(() => fizzCalls++);
         _logicOutputFactoryMock.Setup(x => x.BuzzOutput(10)).Callback(() => buzzCalls++);
         var mapper = _cut.CreateMapper();
@@ -69,6 +69,7 @@ public class FizzBuzzLogicMapperFactoryTests
     public void CreateMapper_NoFizzBuzzBinding_AlwaysEvaluatesTrueAndUsesNoFizzBuzzOutput()
     {
         var outputValue = -1;
+        _fizzBuzzLogicEvaluationFactoryMock.Setup(x => x.TrueEvaluation(It.IsAny<int>())).Returns(true);
         _logicOutputFactoryMock.Setup(x => x.NoFizzBuzzOutput(It.IsAny<int>())).Callback<int>(v => outputValue = v);
         var mapper = _cut.CreateMapper();
 

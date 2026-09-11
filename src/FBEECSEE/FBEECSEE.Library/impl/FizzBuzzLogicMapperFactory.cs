@@ -5,12 +5,12 @@ namespace FBEECSEE.Library.impl;
 
 internal class FizzBuzzLogicMapperFactory : IFizzBuzzLogicMapperFactory
 {
-    private readonly IFizzBuzzLogicFactory _fizzBuzzLogicFactory;
+    private readonly IFizzBuzzLogicEvaluationFactory _fizzBuzzLogicEvaluationFactory;
     private readonly ILogicOutputFactory _logicOutputFactory;
 
-    public FizzBuzzLogicMapperFactory(IFizzBuzzLogicFactory fizzBuzzLogicFactory, ILogicOutputFactory logicOutputFactory)
+    public FizzBuzzLogicMapperFactory(IFizzBuzzLogicEvaluationFactory fizzBuzzLogicEvaluationFactory, ILogicOutputFactory logicOutputFactory)
     {
-        _fizzBuzzLogicFactory = fizzBuzzLogicFactory;
+        _fizzBuzzLogicEvaluationFactory = fizzBuzzLogicEvaluationFactory;
         _logicOutputFactory = logicOutputFactory;
     }
 
@@ -18,10 +18,10 @@ internal class FizzBuzzLogicMapperFactory : IFizzBuzzLogicMapperFactory
     {
         return new Dictionary<FizzBuzzEnum, EvaluationActionBinding<int>>()
         {
-            {FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<int>(value => _fizzBuzzLogicFactory.FizzBuzzEvalLogic(value), _logicOutputFactory.FizzBuzzOutput)},
-            {FizzBuzzEnum.Fizz, new EvaluationActionBinding<int>(value => _fizzBuzzLogicFactory.FizzEvalLogic(value), _logicOutputFactory.FizzOutput)},
-            {FizzBuzzEnum.Buzz, new EvaluationActionBinding<int>(value => _fizzBuzzLogicFactory.BuzzEvalLogic(value), _logicOutputFactory.BuzzOutput)},
-            {FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_=> true, _logicOutputFactory.NoFizzBuzzOutput)},
+            {FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<int>(_fizzBuzzLogicEvaluationFactory.FizzBuzzEvaluation, _logicOutputFactory.FizzBuzzOutput)},
+            {FizzBuzzEnum.Fizz, new EvaluationActionBinding<int>(_fizzBuzzLogicEvaluationFactory.FizzEvaluation, _logicOutputFactory.FizzOutput)},
+            {FizzBuzzEnum.Buzz, new EvaluationActionBinding<int>(_fizzBuzzLogicEvaluationFactory.BuzzEvaluation, _logicOutputFactory.BuzzOutput)},
+            {FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_fizzBuzzLogicEvaluationFactory.TrueEvaluation, _logicOutputFactory.NoFizzBuzzOutput)},
         };
     }
 }
