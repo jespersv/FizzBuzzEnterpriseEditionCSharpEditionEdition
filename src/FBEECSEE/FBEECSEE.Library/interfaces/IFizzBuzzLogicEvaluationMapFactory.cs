@@ -2,7 +2,7 @@
 
 namespace FBEECSEE.Library.interfaces;
 
-internal interface IFizzBuzzLogicMapFactory
+internal interface IFizzBuzzLogicEvaluationMapFactory
 {
     FizzBuzzLogicMap CreateFizzBuzzLogicMap();
     FizzBuzzLogicMap CreateBuzzLogicMap();

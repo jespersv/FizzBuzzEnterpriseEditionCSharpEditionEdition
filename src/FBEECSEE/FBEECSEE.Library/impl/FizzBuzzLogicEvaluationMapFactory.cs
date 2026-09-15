@@ -3,12 +3,12 @@ using FBEECSEE.Library.interfaces;
 
 namespace FBEECSEE.Library.impl;
 
-internal class FizzBuzzLogicMapFactory : IFizzBuzzLogicMapFactory
+internal class FizzBuzzLogicEvaluationMapFactory : IFizzBuzzLogicEvaluationMapFactory
 {
     private readonly IFizzBuzzLogicEvaluationFactory _fizzBuzzLogicEvaluationFactory;
     private readonly ILogicOutputFactory _logicOutputFactory;
 
-    public FizzBuzzLogicMapFactory(IFizzBuzzLogicEvaluationFactory fizzBuzzLogicEvaluationFactory, ILogicOutputFactory logicOutputFactory)
+    public FizzBuzzLogicEvaluationMapFactory(IFizzBuzzLogicEvaluationFactory fizzBuzzLogicEvaluationFactory, ILogicOutputFactory logicOutputFactory)
     {
         _fizzBuzzLogicEvaluationFactory = fizzBuzzLogicEvaluationFactory;
         _logicOutputFactory = logicOutputFactory;

@@ -7,9 +7,9 @@ internal class FizzBuzzLogicProvider : IFizzBuzzLogicProvider
 {
     private readonly Dictionary<FizzBuzzEnum, EvaluationActionBinding<int>> _logicMapperFactory;
 
-    public FizzBuzzLogicProvider(IFizzBuzzLogicMapperFactory logicMapperFactory)
+    public FizzBuzzLogicProvider(IFizzBuzzLogicEvaluationMapperFactory logicEvaluationMapperFactory)
     {
-        _logicMapperFactory = logicMapperFactory.CreateMapper();
+        _logicMapperFactory = logicEvaluationMapperFactory.CreateMapper();
     }
 
     public Func<bool> GetEval(FizzBuzzEnum en, int value) => () => _logicMapperFactory[en].eval(value);

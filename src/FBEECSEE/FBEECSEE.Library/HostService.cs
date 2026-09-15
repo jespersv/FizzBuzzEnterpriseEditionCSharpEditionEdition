@@ -1,16 +1,12 @@
 ﻿using Autofac;
+using Autofac.Core;
 using FBEECSEE.Library.interfaces;
 
 namespace FBEECSEE.Library;
 
 public class HostService
 {
-    private readonly IContainer _container;
-
-    public HostService(IContainer container)
-    {
-        _container = container;
-    }
+    private static readonly IFizzBuzzService Service;
 
     public static HostService Instance { get; }
 
@@ -19,13 +15,13 @@ public class HostService
         var builder = new ContainerBuilder();
         builder.RegisterModule<Module>();
         var container = builder.Build();
-        Instance = new HostService(container);
+        Service = container.Resolve<IFizzBuzzService>();
+        Instance = new HostService();
     }
 
     public Task Run()
     {
-        var service = _container.Resolve<IFizzBuzzService>();
-        service.Run();
+        Service.Run();
 
         return Task.CompletedTask;
     }

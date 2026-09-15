@@ -9,13 +9,13 @@ namespace FBEECSEE.Library.Tests.impl;
 [TestFixture]
 public class FizzBuzzLogicProviderTests
 {
-    private Mock<IFizzBuzzLogicMapperFactory> _logicMapperFactoryMock = null!;
+    private Mock<IFizzBuzzLogicEvaluationMapperFactory> _logicMapperFactoryMock = null!;
     private FizzBuzzLogicProvider _cut = null!;
 
     [SetUp]
     public void SetUp()
     {
-        _logicMapperFactoryMock = new Mock<IFizzBuzzLogicMapperFactory>();
+        _logicMapperFactoryMock = new Mock<IFizzBuzzLogicEvaluationMapperFactory>();
     }
 
     [Test]

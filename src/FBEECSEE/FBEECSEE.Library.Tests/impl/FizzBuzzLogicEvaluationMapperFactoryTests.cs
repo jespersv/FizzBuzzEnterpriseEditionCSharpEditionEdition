@@ -7,16 +7,16 @@ using NUnit.Framework;
 namespace FBEECSEE.Library.Tests.impl;
 
 [TestFixture]
-public class FizzBuzzLogicMapperFactoryTests
+public class FizzBuzzLogicEvaluationMapperFactoryTests
 {
     private Mock<IFizzBuzzLogicMapFactory> _fizzBuzzLogicMapFactoryMock = null!;
-    private FizzBuzzLogicMapperFactory _cut = null!;
+    private FizzBuzzLogicEvaluationMapperFactory _cut = null!;
 
     [SetUp]
     public void SetUp()
     {
         _fizzBuzzLogicMapFactoryMock = new Mock<IFizzBuzzLogicMapFactory>();
-        _cut = new FizzBuzzLogicMapperFactory(_fizzBuzzLogicMapFactoryMock.Object);
+        _cut = new FizzBuzzLogicEvaluationMapperFactory(_fizzBuzzLogicMapFactoryMock.Object);
     }
 
     [Test]
