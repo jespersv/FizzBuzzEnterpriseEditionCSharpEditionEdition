@@ -1,5 +1,5 @@
+using FBEECSEE.Library.entities;
 using FBEECSEE.Library.impl;
-using FBEECSEE.Library.interfaces;
 using Moq;
 using NUnit.Framework;
 
@@ -8,31 +8,28 @@ namespace FBEECSEE.Library.Tests.impl;
 [TestFixture]
 public class LoopEvaluationFactoryTests
 {
-    private Mock<IFizzBuzzLogicProvider> _logicServiceMock = null!;
+    private Mock<IFizzBuzzOperatorLogicMapFactory> _factoryMock = null!;
     private LoopEvaluationFactory _cut = null!;
 
     [SetUp]
     public void SetUp()
     {
-        _logicServiceMock = new Mock<IFizzBuzzLogicProvider>();
-        _cut = new LoopEvaluationFactory(_logicServiceMock.Object);
+        _factoryMock = new Mock<IFizzBuzzOperatorLogicMapFactory>();
+        _cut = new LoopEvaluationFactory(_factoryMock.Object);
     }
 
     [Test]
-    public void Create_WhenFizzBuzzIsTrue_RunsOnlyFizzBuzzAction()
+    public void Create_WhenFizzBuzzConditionMatches_RunsOnlyFizzBuzzAction()
     {
         var fizzBuzzCalls = 0;
         var fizzCalls = 0;
         var buzzCalls = 0;
         var noFizzBuzzCalls = 0;
 
-        _logicServiceMock.Setup(x => x.GetEval(FizzBuzzEnum.FizzBuzz, 15)).Returns(() => true);
-        _logicServiceMock.Setup(x => x.GetEval(FizzBuzzEnum.Fizz, 15)).Returns(() => true);
-        _logicServiceMock.Setup(x => x.GetEval(FizzBuzzEnum.Buzz, 15)).Returns(() => true);
-        _logicServiceMock.Setup(x => x.GetResult(FizzBuzzEnum.FizzBuzz)).Returns(() => fizzBuzzCalls++);
-        _logicServiceMock.Setup(x => x.GetResult(FizzBuzzEnum.Fizz)).Returns(() => fizzCalls++);
-        _logicServiceMock.Setup(x => x.GetResult(FizzBuzzEnum.Buzz)).Returns(() => buzzCalls++);
-        _logicServiceMock.Setup(x => x.GetResult(FizzBuzzEnum.NoFizzBuzz, 15)).Returns(() => noFizzBuzzCalls++);
+        _factoryMock.Setup(x => x.GetFizzBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => true, _ => () => fizzBuzzCalls++));
+        _factoryMock.Setup(x => x.GetFizz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => true, _ => () => fizzCalls++));
+        _factoryMock.Setup(x => x.GetBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => true, _ => () => buzzCalls++));
+        _factoryMock.Setup(x => x.GetNoFizzBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => true, _ => () => noFizzBuzzCalls++));
 
         var evaluator = _cut.Create();
         evaluator(15).Run();
@@ -48,13 +45,10 @@ public class LoopEvaluationFactoryTests
     {
         var capturedValue = -1;
 
-        _logicServiceMock.Setup(x => x.GetEval(FizzBuzzEnum.FizzBuzz, 7)).Returns(() => false);
-        _logicServiceMock.Setup(x => x.GetEval(FizzBuzzEnum.Fizz, 7)).Returns(() => false);
-        _logicServiceMock.Setup(x => x.GetEval(FizzBuzzEnum.Buzz, 7)).Returns(() => false);
-        _logicServiceMock.Setup(x => x.GetResult(FizzBuzzEnum.FizzBuzz)).Returns(() => { });
-        _logicServiceMock.Setup(x => x.GetResult(FizzBuzzEnum.Fizz)).Returns(() => { });
-        _logicServiceMock.Setup(x => x.GetResult(FizzBuzzEnum.Buzz)).Returns(() => { });
-        _logicServiceMock.Setup(x => x.GetResult(FizzBuzzEnum.NoFizzBuzz, 7)).Returns(() => capturedValue = 7);
+        _factoryMock.Setup(x => x.GetFizzBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => false, _ => () => { }));
+        _factoryMock.Setup(x => x.GetFizz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => false, _ => () => { }));
+        _factoryMock.Setup(x => x.GetBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => false, _ => () => { }));
+        _factoryMock.Setup(x => x.GetNoFizzBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => true, value => () => capturedValue = value));
 
         var evaluator = _cut.Create();
         evaluator(7).Run();

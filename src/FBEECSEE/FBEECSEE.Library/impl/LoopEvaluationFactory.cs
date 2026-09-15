@@ -5,21 +5,25 @@ namespace FBEECSEE.Library.impl;
 
 internal class LoopEvaluationFactory : ILoopEvaluationFactory
 {
-    private readonly IFizzBuzzLogicProvider _logicMap;
+    private readonly IFizzBuzzOperatorLogicMapFactory _factory;
 
-    public LoopEvaluationFactory(IFizzBuzzLogicProvider logicMap)
+    public LoopEvaluationFactory(IFizzBuzzOperatorLogicMapFactory factory)
     {
-        _logicMap = logicMap;
+        _factory = factory;
     }
 
     public Func<int, IfTee> Create()
     {
+        var fizzBuzzOperatorLogicMap = _factory.GetFizzBuzz();
+        var fizzOperatorLogicMap = _factory.GetFizz();
+        var buzzOperatorLogicMap = _factory.GetBuzz();
+        var nfBuzzOperatorLogicMap = _factory.GetNoFizzBuzz();
+
         return value => If.Tee()
-            .If(_logicMap.GetEval(FizzBuzzEnum.FizzBuzz, value), _logicMap.GetResult(FizzBuzzEnum.FizzBuzz))
-            .ElseIf(_logicMap.GetEval(FizzBuzzEnum.Fizz, value), _logicMap.GetResult(FizzBuzzEnum.Fizz))
-            .ElseIf(_logicMap.GetEval(FizzBuzzEnum.Buzz, value), _logicMap.GetResult(FizzBuzzEnum.Buzz))
-            .Else(_logicMap.GetResult(FizzBuzzEnum.NoFizzBuzz, value))
+            .If(fizzBuzzOperatorLogicMap.ConditionEval(value), fizzBuzzOperatorLogicMap.Function(value))
+            .ElseIf(fizzOperatorLogicMap.ConditionEval(value), fizzOperatorLogicMap.Function(value))
+            .ElseIf(buzzOperatorLogicMap.ConditionEval(value), buzzOperatorLogicMap.Function(value))
+            .Else(nfBuzzOperatorLogicMap.Function(value))
             .Build();
     }
 }
-

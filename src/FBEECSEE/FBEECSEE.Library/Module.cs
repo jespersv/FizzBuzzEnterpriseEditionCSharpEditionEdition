@@ -13,10 +13,11 @@ public class Module : Autofac.Module
         builder.RegisterTypeInstancePerLifetimeScope<DisplayService, IDisplayService>();
         builder.RegisterTypeInstancePerLifetimeScope<EquateService, IEquateService>();
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicFactory, IFizzBuzzLogicFactory>();
-        builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicMapperFactory, IFizzBuzzLogicMapperFactory>();
+        builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicEvaluationMapperFactory, IFizzBuzzLogicEvaluationMapperFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicEvaluationFactory, IFizzBuzzLogicEvaluationFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicProvider, IFizzBuzzLogicProvider>();
-        builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicMapFactory, IFizzBuzzLogicMapFactory>();
+        builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicEvaluationMapFactory, IFizzBuzzLogicEvaluationMapFactory>();
+        builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzOperatorLogicMapFactory, IFizzBuzzOperatorLogicMapFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzService, IFizzBuzzService>();
         builder.RegisterTypeInstancePerLifetimeScope<LogicOutputFactory, ILogicOutputFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<LoopEnumerationFactory, ILoopEnumerationFactory>();
