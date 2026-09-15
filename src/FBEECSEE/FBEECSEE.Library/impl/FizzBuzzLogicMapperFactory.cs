@@ -5,23 +5,28 @@ namespace FBEECSEE.Library.impl;
 
 internal class FizzBuzzLogicMapperFactory : IFizzBuzzLogicMapperFactory
 {
-    private readonly IFizzBuzzLogicEvaluationFactory _fizzBuzzLogicEvaluationFactory;
-    private readonly ILogicOutputFactory _logicOutputFactory;
+    private readonly IFizzBuzzLogicMapFactory _fizzBuzzLogicMapFactory;
 
-    public FizzBuzzLogicMapperFactory(IFizzBuzzLogicEvaluationFactory fizzBuzzLogicEvaluationFactory, ILogicOutputFactory logicOutputFactory)
+    public FizzBuzzLogicMapperFactory(IFizzBuzzLogicMapFactory fizzBuzzLogicMapFactory)
     {
-        _fizzBuzzLogicEvaluationFactory = fizzBuzzLogicEvaluationFactory;
-        _logicOutputFactory = logicOutputFactory;
+        _fizzBuzzLogicMapFactory = fizzBuzzLogicMapFactory;
     }
 
     public Dictionary<FizzBuzzEnum, EvaluationActionBinding<int>> CreateMapper()
     {
-        return new Dictionary<FizzBuzzEnum, EvaluationActionBinding<int>>()
+        var fizzBuzzLogicMap = _fizzBuzzLogicMapFactory.CreateFizzBuzzLogicMap();
+        var buzzLogicMap = _fizzBuzzLogicMapFactory.CreateBuzzLogicMap();
+        var fizzLogicMap = _fizzBuzzLogicMapFactory.CreateFizzLogicMap();
+        var noFizzBuzzLogicMap = _fizzBuzzLogicMapFactory.CreateNoFizzBuzzLogicMap();
+
+        var dict = new Dictionary<FizzBuzzEnum, EvaluationActionBinding<int>>
         {
-            {FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<int>(_fizzBuzzLogicEvaluationFactory.FizzBuzzEvaluation, _logicOutputFactory.FizzBuzzOutput)},
-            {FizzBuzzEnum.Fizz, new EvaluationActionBinding<int>(_fizzBuzzLogicEvaluationFactory.FizzEvaluation, _logicOutputFactory.FizzOutput)},
-            {FizzBuzzEnum.Buzz, new EvaluationActionBinding<int>(_fizzBuzzLogicEvaluationFactory.BuzzEvaluation, _logicOutputFactory.BuzzOutput)},
-            {FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_fizzBuzzLogicEvaluationFactory.TrueEvaluation, _logicOutputFactory.NoFizzBuzzOutput)},
+            { fizzBuzzLogicMap.Key, fizzBuzzLogicMap.Value },
+            { buzzLogicMap.Key, buzzLogicMap.Value },
+            { fizzLogicMap.Key, fizzLogicMap.Value },
+            { noFizzBuzzLogicMap.Key, noFizzBuzzLogicMap.Value },
         };
+
+        return dict;
     }
 }

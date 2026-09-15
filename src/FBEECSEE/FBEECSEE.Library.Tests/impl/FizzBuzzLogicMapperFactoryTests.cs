@@ -1,3 +1,4 @@
+using FBEECSEE.Library.entities;
 using FBEECSEE.Library.impl;
 using FBEECSEE.Library.interfaces;
 using Moq;
@@ -8,50 +9,73 @@ namespace FBEECSEE.Library.Tests.impl;
 [TestFixture]
 public class FizzBuzzLogicMapperFactoryTests
 {
-    private Mock<IFizzBuzzLogicEvaluationFactory> _fizzBuzzLogicEvaluationFactoryMock = null!;
-    private Mock<ILogicOutputFactory> _logicOutputFactoryMock = null!;
+    private Mock<IFizzBuzzLogicMapFactory> _fizzBuzzLogicMapFactoryMock = null!;
     private FizzBuzzLogicMapperFactory _cut = null!;
 
     [SetUp]
     public void SetUp()
     {
-        _fizzBuzzLogicEvaluationFactoryMock = new Mock<IFizzBuzzLogicEvaluationFactory>();
-        _logicOutputFactoryMock = new Mock<ILogicOutputFactory>();
-        _cut = new FizzBuzzLogicMapperFactory(_fizzBuzzLogicEvaluationFactoryMock.Object, _logicOutputFactoryMock.Object);
+        _fizzBuzzLogicMapFactoryMock = new Mock<IFizzBuzzLogicMapFactory>();
+        _cut = new FizzBuzzLogicMapperFactory(_fizzBuzzLogicMapFactoryMock.Object);
     }
 
     [Test]
     public void CreateMapper_ReturnsBindingsForAllEnums()
     {
+        _fizzBuzzLogicMapFactoryMock.Setup(x => x.CreateFizzBuzzLogicMap()).Returns(new FizzBuzzLogicMap(FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+        _fizzBuzzLogicMapFactoryMock.Setup(x => x.CreateBuzzLogicMap()).Returns(new FizzBuzzLogicMap(FizzBuzzEnum.Fizz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+        _fizzBuzzLogicMapFactoryMock.Setup(x => x.CreateFizzLogicMap()).Returns(new FizzBuzzLogicMap(FizzBuzzEnum.Buzz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+        _fizzBuzzLogicMapFactoryMock.Setup(x => x.CreateNoFizzBuzzLogicMap()).Returns(new FizzBuzzLogicMap(FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+
         var mapper = _cut.CreateMapper();
 
         Assert.That(mapper.Keys, Is.EquivalentTo(new[] { FizzBuzzEnum.FizzBuzz, FizzBuzzEnum.Fizz, FizzBuzzEnum.Buzz, FizzBuzzEnum.NoFizzBuzz }));
     }
 
     [Test]
-    public void CreateMapper_FizzBuzzBinding_UsesFizzBuzzEvaluationFactoryAndOutput()
+    public void CreateMapper_UsesFizzBuzzMapFromFactory()
     {
-        var outputCallCount = 0;
-        _fizzBuzzLogicEvaluationFactoryMock.Setup(x => x.FizzBuzzEvaluation(15)).Returns(true);
-        _logicOutputFactoryMock.Setup(x => x.FizzBuzzOutput(15)).Callback(() => outputCallCount++);
+        var resultCallCount = 0;
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateFizzBuzzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => resultCallCount++)));
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateBuzzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.Fizz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateFizzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.Buzz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateNoFizzBuzzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+
         var mapper = _cut.CreateMapper();
 
         var eval = mapper[FizzBuzzEnum.FizzBuzz].eval(15);
         mapper[FizzBuzzEnum.FizzBuzz].result(15);
 
         Assert.That(eval, Is.True);
-        Assert.That(outputCallCount, Is.EqualTo(1));
+        Assert.That(resultCallCount, Is.EqualTo(1));
     }
 
     [Test]
-    public void CreateMapper_FizzAndBuzzBindings_UseMatchingEvaluationFactoryAndOutput()
+    public void CreateMapper_UsesFizzAndBuzzMapsFromFactory()
     {
         var fizzCalls = 0;
         var buzzCalls = 0;
-        _fizzBuzzLogicEvaluationFactoryMock.Setup(x => x.FizzEvaluation(9)).Returns(true);
-        _fizzBuzzLogicEvaluationFactoryMock.Setup(x => x.BuzzEvaluation(10)).Returns(true);
-        _logicOutputFactoryMock.Setup(x => x.FizzOutput(9)).Callback(() => fizzCalls++);
-        _logicOutputFactoryMock.Setup(x => x.BuzzOutput(10)).Callback(() => buzzCalls++);
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateFizzBuzzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateBuzzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.Fizz, new EvaluationActionBinding<int>(_ => true, _ => fizzCalls++)));
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateFizzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.Buzz, new EvaluationActionBinding<int>(_ => true, _ => buzzCalls++)));
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateNoFizzBuzzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+
         var mapper = _cut.CreateMapper();
 
         var fizzEval = mapper[FizzBuzzEnum.Fizz].eval(9);
@@ -66,11 +90,22 @@ public class FizzBuzzLogicMapperFactoryTests
     }
 
     [Test]
-    public void CreateMapper_NoFizzBuzzBinding_AlwaysEvaluatesTrueAndUsesNoFizzBuzzOutput()
+    public void CreateMapper_UsesNoFizzBuzzMapFromFactory()
     {
         var outputValue = -1;
-        _fizzBuzzLogicEvaluationFactoryMock.Setup(x => x.TrueEvaluation(It.IsAny<int>())).Returns(true);
-        _logicOutputFactoryMock.Setup(x => x.NoFizzBuzzOutput(It.IsAny<int>())).Callback<int>(v => outputValue = v);
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateFizzBuzzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateBuzzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.Fizz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateFizzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.Buzz, new EvaluationActionBinding<int>(_ => true, _ => { })));
+        _fizzBuzzLogicMapFactoryMock
+            .Setup(x => x.CreateNoFizzBuzzLogicMap())
+            .Returns(new FizzBuzzLogicMap(FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_ => true, value => outputValue = value)));
+
         var mapper = _cut.CreateMapper();
 
         var eval = mapper[FizzBuzzEnum.NoFizzBuzz].eval(999);
