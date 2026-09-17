@@ -21,8 +21,8 @@ public class LoopLogicServiceTests
     [Test]
     public void RunLoop_ExecutesLoopFactoryDelegate()
     {
-        IEnumerable<int>? capturedEnumeration = null;
-        var input = new[] { 1, 5, 10 };
+        IEnumerable<FizzBuzzArrayValue>? capturedEnumeration = null;
+        var input = new FizzBuzzArrayValue[] { new(1), new(5), new(10) };
 
         _loopLogicFactoryMock
             .Setup(x => x.CreateLoop())

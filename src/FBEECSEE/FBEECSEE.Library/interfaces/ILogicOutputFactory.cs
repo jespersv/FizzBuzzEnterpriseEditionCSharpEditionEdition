@@ -1,12 +1,14 @@
-﻿namespace FBEECSEE.Library.interfaces;
+﻿using FBEECSEE.Library.impl;
+
+namespace FBEECSEE.Library.interfaces;
 
 internal interface ILogicOutputFactory
 {
-    void BuzzOutput(int value);
+    void BuzzOutput(FizzBuzzArrayValue value);
 
-    void FizzOutput(int value);
+    void FizzOutput(FizzBuzzArrayValue value);
 
-    void FizzBuzzOutput(int value);
+    void FizzBuzzOutput(FizzBuzzArrayValue value);
 
-    void NoFizzBuzzOutput(int value);
+    void NoFizzBuzzOutput(FizzBuzzArrayValue value);
 }

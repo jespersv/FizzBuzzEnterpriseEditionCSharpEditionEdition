@@ -11,7 +11,7 @@ internal class LoopLogicFactory : ILoopLogicFactory
         _loopEvaluationFactory = loopEvaluationFactory;
     }
 
-    public Func<IEnumerable<int>, Task> CreateLoop()
+    public Func<IEnumerable<FizzBuzzArrayValue>, Task> CreateLoop()
     {
         return loopEnumeration =>
         {

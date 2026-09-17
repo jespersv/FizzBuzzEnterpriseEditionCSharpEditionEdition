@@ -19,10 +19,10 @@ public class LoopEnumerationFactoryTests
     {
         var values = _cut.CreateLoopEnumeration().ToArray();
 
-        Assert.That(values, Is.EqualTo(Enumerable.Range(Constants.START_LOOP_VALUE, Constants.MAXIMUM_LOOP_VALUE)));
+        Assert.That(values.Select(p=>p.value).ToArray(), Is.EqualTo(Enumerable.Range(Constants.START_LOOP_VALUE, Constants.MAXIMUM_LOOP_VALUE)));
         Assert.That(values.Length, Is.EqualTo(Constants.MAXIMUM_LOOP_VALUE));
-        Assert.That(values.First(), Is.EqualTo(Constants.START_LOOP_VALUE));
-        Assert.That(values.Last(), Is.EqualTo(Constants.START_LOOP_VALUE + Constants.MAXIMUM_LOOP_VALUE - 1));
+        Assert.That(values.First().value, Is.EqualTo(Constants.START_LOOP_VALUE));
+        Assert.That(values.Last().value, Is.EqualTo(Constants.START_LOOP_VALUE + Constants.MAXIMUM_LOOP_VALUE - 1));
     }
 
 
@@ -130,7 +130,7 @@ public class LoopEnumerationFactoryTests
     {
         var values = _cut.CreateLoopEnumeration().ToArray();
 
-        Assert.That(values[position], Is.EqualTo(expectedValue));
+        Assert.That(values[position].value, Is.EqualTo(expectedValue));
     }
 
     [TestCase(1, LoopEnumerationFactory.Numbers.One)]

@@ -12,7 +12,7 @@ internal class LoopEvaluationFactory : ILoopEvaluationFactory
         _factory = factory;
     }
 
-    public Func<int, IfTee> Create()
+    public Func<FizzBuzzArrayValue, IfTee> Create()
     {
         var fizzBuzzOperatorLogicMap = _factory.GetFizzBuzz();
         var fizzOperatorLogicMap = _factory.GetFizz();

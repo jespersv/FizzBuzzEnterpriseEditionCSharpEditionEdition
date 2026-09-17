@@ -1,8 +1,9 @@
-﻿using FBEECSEE.Library.interfaces;
+﻿using FBEECSEE.Library.impl;
+using FBEECSEE.Library.interfaces;
 
 namespace FBEECSEE.Library.entities;
 
 internal record BuzzEvaluationActionBinding(IFizzBuzzLogicEvaluationFactory fizzBuzzLogicEvaluationFactory, ILogicOutputFactory logicOutputFactory) :
-    EvaluationActionBinding<int>(fizzBuzzLogicEvaluationFactory.BuzzEvaluation, logicOutputFactory.BuzzOutput)
+    EvaluationActionBinding<FizzBuzzArrayValue>(fizzBuzzLogicEvaluationFactory.BuzzEvaluation, logicOutputFactory.BuzzOutput)
 {
 }

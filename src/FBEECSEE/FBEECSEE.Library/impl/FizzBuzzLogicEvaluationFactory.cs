@@ -11,11 +11,11 @@ internal class FizzBuzzLogicEvaluationFactory : IFizzBuzzLogicEvaluationFactory
         _fizzBuzzLogicFactory = fizzBuzzLogicFactory;
     }
 
-    public bool FizzBuzzEvaluation(int value) => _fizzBuzzLogicFactory.FizzBuzzLogic(value);
+    public bool FizzBuzzEvaluation(FizzBuzzArrayValue value) => _fizzBuzzLogicFactory.FizzBuzzLogic(value);
 
-    public bool FizzEvaluation(int value) => _fizzBuzzLogicFactory.FizzLogic(value);
+    public bool FizzEvaluation(FizzBuzzArrayValue value) => _fizzBuzzLogicFactory.FizzLogic(value);
 
-    public bool BuzzEvaluation(int value) => _fizzBuzzLogicFactory.BuzzLogic(value);
+    public bool BuzzEvaluation(FizzBuzzArrayValue value) => _fizzBuzzLogicFactory.BuzzLogic(value);
 
-    public bool TrueEvaluation(int _) => true;
+    public bool TrueEvaluation(FizzBuzzArrayValue _) => true;
 }

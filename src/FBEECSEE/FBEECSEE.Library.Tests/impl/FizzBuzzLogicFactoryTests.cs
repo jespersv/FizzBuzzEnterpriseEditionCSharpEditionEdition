@@ -25,7 +25,7 @@ public class FizzBuzzLogicFactoryTests
     {
         _modulusCompareServiceMock.Setup(x => x.Check(9, Constants.FIZZVALUE, Constants.MODULE_FIZZBUZZ_SHOULD_EQUAL)).Returns(true);
 
-        var result = _cut.FizzLogic(9);
+        var result = _cut.FizzLogic(new(9));
 
         Assert.That(result, Is.True);
         Assert.That(_modulusCompareServiceMock.Invocations.Count, Is.EqualTo(1));
@@ -36,7 +36,7 @@ public class FizzBuzzLogicFactoryTests
     {
         _modulusCompareServiceMock.Setup(x => x.Check(10, Constants.BUZZVALUE, Constants.MODULE_FIZZBUZZ_SHOULD_EQUAL)).Returns(true);
 
-        var result = _cut.BuzzLogic(10);
+        var result = _cut.BuzzLogic(new(10));
 
         Assert.That(result, Is.True);
         Assert.That(_modulusCompareServiceMock.Invocations.Count, Is.EqualTo(1));
@@ -61,7 +61,7 @@ public class FizzBuzzLogicFactoryTests
             })
             .Returns(false);
 
-        var result = _cut.FizzBuzzLogic(9);
+        var result = _cut.FizzBuzzLogic(new(9));
 
         Assert.That(result, Is.False);
         Assert.That(andLeft, Is.True);

@@ -2,4 +2,4 @@
 
 namespace FBEECSEE.Library.impl;
 
-internal record FizzBuzzLogicMap(FizzBuzzEnum Key, EvaluationActionBinding<int> Value);
+internal record FizzBuzzLogicMap(FizzBuzzEnum Key, EvaluationActionBinding<FizzBuzzArrayValue> Value);

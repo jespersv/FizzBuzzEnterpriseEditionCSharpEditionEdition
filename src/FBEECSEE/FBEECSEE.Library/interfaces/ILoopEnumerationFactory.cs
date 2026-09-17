@@ -1,6 +1,8 @@
-﻿namespace FBEECSEE.Library.interfaces;
+﻿using FBEECSEE.Library.impl;
+
+namespace FBEECSEE.Library.interfaces;
 
 internal interface ILoopEnumerationFactory
 {
-    IEnumerable<int> CreateLoopEnumeration();
+    IEnumerable<FizzBuzzArrayValue> CreateLoopEnumeration();
 }

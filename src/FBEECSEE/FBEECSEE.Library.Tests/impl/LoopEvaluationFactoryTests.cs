@@ -32,7 +32,7 @@ public class LoopEvaluationFactoryTests
         _factoryMock.Setup(x => x.GetNoFizzBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => true, _ => () => noFizzBuzzCalls++));
 
         var evaluator = _cut.Create();
-        evaluator(15).Run();
+        evaluator(new(15)).Run();
 
         Assert.That(fizzBuzzCalls, Is.EqualTo(1));
         Assert.That(fizzCalls, Is.EqualTo(0));
@@ -48,10 +48,10 @@ public class LoopEvaluationFactoryTests
         _factoryMock.Setup(x => x.GetFizzBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => false, _ => () => { }));
         _factoryMock.Setup(x => x.GetFizz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => false, _ => () => { }));
         _factoryMock.Setup(x => x.GetBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => false, _ => () => { }));
-        _factoryMock.Setup(x => x.GetNoFizzBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => true, value => () => capturedValue = value));
+        _factoryMock.Setup(x => x.GetNoFizzBuzz()).Returns(new FizzBuzzOperatorLogicMap(_ => () => true, value => () => capturedValue = value.value));
 
         var evaluator = _cut.Create();
-        evaluator(7).Run();
+        evaluator(new(7)).Run();
 
         Assert.That(capturedValue, Is.EqualTo(7));
     }

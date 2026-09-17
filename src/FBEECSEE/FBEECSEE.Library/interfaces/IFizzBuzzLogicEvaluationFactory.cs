@@ -1,12 +1,14 @@
-﻿namespace FBEECSEE.Library.interfaces;
+﻿using FBEECSEE.Library.impl;
+
+namespace FBEECSEE.Library.interfaces;
 
 internal interface IFizzBuzzLogicEvaluationFactory
 {
-    bool FizzBuzzEvaluation(int value);
+    bool FizzBuzzEvaluation(FizzBuzzArrayValue value);
 
-    bool FizzEvaluation(int value);
+    bool FizzEvaluation(FizzBuzzArrayValue value);
 
-    bool BuzzEvaluation(int value);
+    bool BuzzEvaluation(FizzBuzzArrayValue value);
 
-    bool TrueEvaluation(int _);
+    bool TrueEvaluation(FizzBuzzArrayValue _);
 }

@@ -11,11 +11,11 @@ internal class LogicOutputFactory : ILogicOutputFactory
         _displayService = displayService;
     }
 
-    public void BuzzOutput(int value) => _displayService.Show(Constants.BUZZ_STR);
+    public void BuzzOutput(FizzBuzzArrayValue _) => _displayService.Show(Constants.BUZZ_STR);
 
-    public void FizzOutput(int value) => _displayService.Show(Constants.FIZZ_STR);
+    public void FizzOutput(FizzBuzzArrayValue _) => _displayService.Show(Constants.FIZZ_STR);
 
-    public void FizzBuzzOutput(int value) => _displayService.Show(Constants.FIZZBUZZ_STR);
+    public void FizzBuzzOutput(FizzBuzzArrayValue _) => _displayService.Show(Constants.FIZZBUZZ_STR);
 
-    public void NoFizzBuzzOutput(int value) => _displayService.Show(value.ToString());
+    public void NoFizzBuzzOutput(FizzBuzzArrayValue value) => _displayService.Show(value.value.ToString());
 }

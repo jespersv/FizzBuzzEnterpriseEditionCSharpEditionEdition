@@ -22,17 +22,17 @@ public class FizzBuzzLogicProviderTests
     public void GetEval_ExecutesMappedEvaluationWithProvidedValue()
     {
         var seenValue = -1;
-        var mapper = new Dictionary<FizzBuzzEnum, EvaluationActionBinding<int>>
+        var mapper = new Dictionary<FizzBuzzEnum, EvaluationActionBinding<FizzBuzzArrayValue>>
         {
-            { FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<int>(_ => false, _ => { }) },
-            { FizzBuzzEnum.Fizz, new EvaluationActionBinding<int>(value => { seenValue = value; return true; }, _ => { }) },
-            { FizzBuzzEnum.Buzz, new EvaluationActionBinding<int>(_ => false, _ => { }) },
-            { FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => { }) }
+            { FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => false, _ => { }) },
+            { FizzBuzzEnum.Fizz, new EvaluationActionBinding<FizzBuzzArrayValue>(value => { seenValue = value.value; return true; }, _ => { }) },
+            { FizzBuzzEnum.Buzz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => false, _ => { }) },
+            { FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => true, _ => { }) }
         };
         _logicMapperFactoryMock.Setup(x => x.CreateMapper()).Returns(mapper);
         _cut = new FizzBuzzLogicProvider(_logicMapperFactoryMock.Object);
 
-        var eval = _cut.GetEval(FizzBuzzEnum.Fizz, 11);
+        var eval = _cut.GetEval(FizzBuzzEnum.Fizz, new(11));
         var result = eval();
 
         Assert.That(result, Is.True);
@@ -42,13 +42,13 @@ public class FizzBuzzLogicProviderTests
     [Test]
     public void GetResult_WithoutValue_PassesDefaultIntValue()
     {
-        var seenValue = -1;
-        var mapper = new Dictionary<FizzBuzzEnum, EvaluationActionBinding<int>>
+        var seenValue = new FizzBuzzArrayValue(-1);
+        var mapper = new Dictionary<FizzBuzzEnum, EvaluationActionBinding<FizzBuzzArrayValue>>
         {
-            { FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<int>(_ => false, _ => { }) },
-            { FizzBuzzEnum.Fizz, new EvaluationActionBinding<int>(_ => true, value => seenValue = value) },
-            { FizzBuzzEnum.Buzz, new EvaluationActionBinding<int>(_ => false, _ => { }) },
-            { FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_ => true, _ => { }) }
+            { FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => false, _ => { }) },
+            { FizzBuzzEnum.Fizz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => true, value => seenValue = value) },
+            { FizzBuzzEnum.Buzz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => false, _ => { }) },
+            { FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => true, _ => { }) }
         };
         _logicMapperFactoryMock.Setup(x => x.CreateMapper()).Returns(mapper);
         _cut = new FizzBuzzLogicProvider(_logicMapperFactoryMock.Object);
@@ -56,24 +56,24 @@ public class FizzBuzzLogicProviderTests
         var action = _cut.GetResult(FizzBuzzEnum.Fizz);
         action();
 
-        Assert.That(seenValue, Is.EqualTo(default(int)));
+        Assert.That(seenValue, Is.EqualTo(default(FizzBuzzArrayValue)));
     }
 
     [Test]
     public void GetResult_WithValue_PassesProvidedValue()
     {
         var seenValue = -1;
-        var mapper = new Dictionary<FizzBuzzEnum, EvaluationActionBinding<int>>
+        var mapper = new Dictionary<FizzBuzzEnum, EvaluationActionBinding<FizzBuzzArrayValue>>
         {
-            { FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<int>(_ => false, _ => { }) },
-            { FizzBuzzEnum.Fizz, new EvaluationActionBinding<int>(_ => true, _ => { }) },
-            { FizzBuzzEnum.Buzz, new EvaluationActionBinding<int>(_ => false, _ => { }) },
-            { FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<int>(_ => true, value => seenValue = value) }
+            { FizzBuzzEnum.FizzBuzz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => false, _ => { }) },
+            { FizzBuzzEnum.Fizz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => true, _ => { }) },
+            { FizzBuzzEnum.Buzz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => false, _ => { }) },
+            { FizzBuzzEnum.NoFizzBuzz, new EvaluationActionBinding<FizzBuzzArrayValue>(_ => true, value => seenValue = value.value) }
         };
         _logicMapperFactoryMock.Setup(x => x.CreateMapper()).Returns(mapper);
         _cut = new FizzBuzzLogicProvider(_logicMapperFactoryMock.Object);
 
-        var action = _cut.GetResult(FizzBuzzEnum.NoFizzBuzz, 42);
+        var action = _cut.GetResult(FizzBuzzEnum.NoFizzBuzz, new(42));
         action();
 
         Assert.That(seenValue, Is.EqualTo(42));

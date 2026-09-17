@@ -4,25 +4,128 @@ namespace FBEECSEE.Library.impl;
 
 internal class LoopEnumerationFactory : ILoopEnumerationFactory
 {
-    private static int[] SeedArray = new[]
+    private static FizzBuzzArrayValue[] SeedArray = new[]
     {
-        Numbers.One, Numbers.Two, Numbers.Three, Numbers.Four, Numbers.Five, Numbers.Six, Numbers.Seven, Numbers.Eight, Numbers.Nine, Numbers.Ten,
-        Numbers.Eleven, Numbers.Twelve, Numbers.Thirteen, Numbers.Fourteen, Numbers.Fifteen, Numbers.Sixteen, Numbers.Seventeen, Numbers.Eighteen, Numbers.Nineteen,        Numbers.Twenty,
-        Numbers.TwentyOne, Numbers.TwentyTwo, Numbers.TwentyThree, Numbers.TwentyFour, Numbers.TwentyFive, Numbers.TwentySix, Numbers.TwentySeven, Numbers.TwentyEight, Numbers.TwentyNine, Numbers.Thirty,
-        Numbers.ThirtyOne, Numbers.ThirtyTwo, Numbers.ThirtyThree, Numbers.ThirtyFour, Numbers.ThirtyFive, Numbers.ThirtySix, Numbers.ThirtySeven, Numbers.ThirtyEight, Numbers.ThirtyNine, Numbers.Forty,
-        Numbers.FortyOne, Numbers.FortyTwo, Numbers.FortyThree, Numbers.FortyFour, Numbers.FortyFive, Numbers.FortySix, Numbers.FortySeven, Numbers.FortyEight, Numbers.FortyNine, Numbers.Fifty,
-        Numbers.FiftyOne, Numbers.FiftyTwo, Numbers.FiftyThree,Numbers.FiftyFour, Numbers.FiftyFive, Numbers.FiftySix, Numbers.FiftySeven, Numbers.FiftyEight, Numbers.FiftyNine,Numbers.Sixty,
-        Numbers.SixtyOne, Numbers.SixtyTwo, Numbers.SixtyThree, Numbers.SixtyFour, Numbers.SixtyFive, Numbers.SixtySix, Numbers.SixtySeven, Numbers.SixtyEight, Numbers.SixtyNine, Numbers.Seventy, Numbers.SeventyOne,
-        Numbers.SeventyTwo, Numbers.SeventyThree, Numbers.SeventyFour, Numbers.SeventyFive, Numbers.SeventySix, Numbers.SeventySeven, Numbers.SeventyEight, Numbers.SeventyNine, Numbers.Eighty, Numbers.EightyOne,
-        Numbers.EightyTwo, Numbers.EightyThree, Numbers.EightyFour, Numbers.EightyFive, Numbers.EightySix, Numbers.EightySeven, Numbers.EightyEight, Numbers.EightyNine, Numbers.Ninety,
-        Numbers.NinetyOne, Numbers.NinetyTwo, Numbers.NinetyThree, Numbers.NinetyFour, Numbers.NinetyFive, Numbers.NinetySix, Numbers.NinetySeven, Numbers.NinetyEight, Numbers.NinetyNine, Numbers.OneHundred
+        TypedFizzBuzzNumbers.One, TypedFizzBuzzNumbers.Two, TypedFizzBuzzNumbers.Three, TypedFizzBuzzNumbers.Four, TypedFizzBuzzNumbers.Five, TypedFizzBuzzNumbers.Six, TypedFizzBuzzNumbers.Seven, TypedFizzBuzzNumbers.Eight, TypedFizzBuzzNumbers.Nine, TypedFizzBuzzNumbers.Ten,
+        TypedFizzBuzzNumbers.Eleven, TypedFizzBuzzNumbers.Twelve, TypedFizzBuzzNumbers.Thirteen, TypedFizzBuzzNumbers.Fourteen, TypedFizzBuzzNumbers.Fifteen, TypedFizzBuzzNumbers.Sixteen, TypedFizzBuzzNumbers.Seventeen, TypedFizzBuzzNumbers.Eighteen, TypedFizzBuzzNumbers.Nineteen,        TypedFizzBuzzNumbers.Twenty,
+        TypedFizzBuzzNumbers.TwentyOne, TypedFizzBuzzNumbers.TwentyTwo, TypedFizzBuzzNumbers.TwentyThree, TypedFizzBuzzNumbers.TwentyFour, TypedFizzBuzzNumbers.TwentyFive, TypedFizzBuzzNumbers.TwentySix, TypedFizzBuzzNumbers.TwentySeven, TypedFizzBuzzNumbers.TwentyEight, TypedFizzBuzzNumbers.TwentyNine, TypedFizzBuzzNumbers.Thirty,
+        TypedFizzBuzzNumbers.ThirtyOne, TypedFizzBuzzNumbers.ThirtyTwo, TypedFizzBuzzNumbers.ThirtyThree, TypedFizzBuzzNumbers.ThirtyFour, TypedFizzBuzzNumbers.ThirtyFive, TypedFizzBuzzNumbers.ThirtySix, TypedFizzBuzzNumbers.ThirtySeven, TypedFizzBuzzNumbers.ThirtyEight, TypedFizzBuzzNumbers.ThirtyNine, TypedFizzBuzzNumbers.Forty,
+        TypedFizzBuzzNumbers.FortyOne, TypedFizzBuzzNumbers.FortyTwo, TypedFizzBuzzNumbers.FortyThree, TypedFizzBuzzNumbers.FortyFour, TypedFizzBuzzNumbers.FortyFive, TypedFizzBuzzNumbers.FortySix, TypedFizzBuzzNumbers.FortySeven, TypedFizzBuzzNumbers.FortyEight, TypedFizzBuzzNumbers.FortyNine, TypedFizzBuzzNumbers.Fifty,
+        TypedFizzBuzzNumbers.FiftyOne, TypedFizzBuzzNumbers.FiftyTwo, TypedFizzBuzzNumbers.FiftyThree,TypedFizzBuzzNumbers.FiftyFour, TypedFizzBuzzNumbers.FiftyFive, TypedFizzBuzzNumbers.FiftySix, TypedFizzBuzzNumbers.FiftySeven, TypedFizzBuzzNumbers.FiftyEight, TypedFizzBuzzNumbers.FiftyNine,TypedFizzBuzzNumbers.Sixty,
+        TypedFizzBuzzNumbers.SixtyOne, TypedFizzBuzzNumbers.SixtyTwo, TypedFizzBuzzNumbers.SixtyThree, TypedFizzBuzzNumbers.SixtyFour, TypedFizzBuzzNumbers.SixtyFive, TypedFizzBuzzNumbers.SixtySix, TypedFizzBuzzNumbers.SixtySeven, TypedFizzBuzzNumbers.SixtyEight, TypedFizzBuzzNumbers.SixtyNine, TypedFizzBuzzNumbers.Seventy, TypedFizzBuzzNumbers.SeventyOne,
+        TypedFizzBuzzNumbers.SeventyTwo, TypedFizzBuzzNumbers.SeventyThree, TypedFizzBuzzNumbers.SeventyFour, TypedFizzBuzzNumbers.SeventyFive, TypedFizzBuzzNumbers.SeventySix, TypedFizzBuzzNumbers.SeventySeven, TypedFizzBuzzNumbers.SeventyEight, TypedFizzBuzzNumbers.SeventyNine, TypedFizzBuzzNumbers.Eighty, TypedFizzBuzzNumbers.EightyOne,
+        TypedFizzBuzzNumbers.EightyTwo, TypedFizzBuzzNumbers.EightyThree, TypedFizzBuzzNumbers.EightyFour, TypedFizzBuzzNumbers.EightyFive, TypedFizzBuzzNumbers.EightySix, TypedFizzBuzzNumbers.EightySeven, TypedFizzBuzzNumbers.EightyEight, TypedFizzBuzzNumbers.EightyNine, TypedFizzBuzzNumbers.Ninety,
+        TypedFizzBuzzNumbers.NinetyOne, TypedFizzBuzzNumbers.NinetyTwo, TypedFizzBuzzNumbers.NinetyThree, TypedFizzBuzzNumbers.NinetyFour, TypedFizzBuzzNumbers.NinetyFive, TypedFizzBuzzNumbers.NinetySix, TypedFizzBuzzNumbers.NinetySeven, TypedFizzBuzzNumbers.NinetyEight, TypedFizzBuzzNumbers.NinetyNine, TypedFizzBuzzNumbers.OneHundred
     };
     /// <summary>
     /// Optimized for top performance.
     /// </summary>
     /// <returns>Enumeration of the fizzbuzz sequence.</returns>
-    public IEnumerable<int> CreateLoopEnumeration() => SeedArray.ToArray();
+    public IEnumerable<FizzBuzzArrayValue> CreateLoopEnumeration() => SeedArray.ToArray();
 
+    internal static class TypedFizzBuzzNumbers
+    {
+        public static FizzBuzzArrayValue One = new(Numbers.One);
+        public static FizzBuzzArrayValue Two = new(Numbers.Two);
+        public static FizzBuzzArrayValue Three = new(Numbers.Three);
+        public static FizzBuzzArrayValue Four = new(Numbers.Four);
+        public static FizzBuzzArrayValue Five = new(Numbers.Five);
+        public static FizzBuzzArrayValue Six = new(Numbers.Six);
+        public static FizzBuzzArrayValue Seven = new(Numbers.Seven);
+        public static FizzBuzzArrayValue Eight = new(Numbers.Eight);
+        public static FizzBuzzArrayValue Nine = new(Numbers.Nine);
+        public static FizzBuzzArrayValue Ten = new(Numbers.Ten);
+        public static FizzBuzzArrayValue Eleven = new(Numbers.Eleven);
+        public static FizzBuzzArrayValue Twelve = new(Numbers.Twelve);
+        public static FizzBuzzArrayValue Thirteen = new(Numbers.Thirteen);
+        public static FizzBuzzArrayValue Fourteen = new(Numbers.Fourteen);
+        public static FizzBuzzArrayValue Fifteen = new(Numbers.Fifteen);
+        public static FizzBuzzArrayValue Sixteen = new(Numbers.Sixteen);
+        public static FizzBuzzArrayValue Seventeen = new(Numbers.Seventeen);
+        public static FizzBuzzArrayValue Eighteen = new(Numbers.Eighteen);
+        public static FizzBuzzArrayValue Nineteen = new(Numbers.Nineteen);
+        public static FizzBuzzArrayValue Twenty = new(Numbers.Twenty);
+        public static FizzBuzzArrayValue TwentyOne = new(Numbers.TwentyOne);
+        public static FizzBuzzArrayValue TwentyTwo = new(Numbers.TwentyTwo);
+        public static FizzBuzzArrayValue TwentyThree = new(Numbers.TwentyThree);
+        public static FizzBuzzArrayValue TwentyFour = new(Numbers.TwentyFour);
+        public static FizzBuzzArrayValue TwentyFive = new(Numbers.TwentyFive);
+        public static FizzBuzzArrayValue TwentySix = new(Numbers.TwentySix);
+        public static FizzBuzzArrayValue TwentySeven = new(Numbers.TwentySeven);
+        public static FizzBuzzArrayValue TwentyEight = new(Numbers.TwentyEight);
+        public static FizzBuzzArrayValue TwentyNine = new(Numbers.TwentyNine);
+        public static FizzBuzzArrayValue Thirty = new(Numbers.Thirty);
+        public static FizzBuzzArrayValue ThirtyOne = new(Numbers.ThirtyOne);
+        public static FizzBuzzArrayValue ThirtyTwo = new(Numbers.ThirtyTwo);
+        public static FizzBuzzArrayValue ThirtyThree = new(Numbers.ThirtyThree);
+        public static FizzBuzzArrayValue ThirtyFour = new(Numbers.ThirtyFour);
+        public static FizzBuzzArrayValue ThirtyFive = new(Numbers.ThirtyFive);
+        public static FizzBuzzArrayValue ThirtySix = new(Numbers.ThirtySix);
+        public static FizzBuzzArrayValue ThirtySeven = new(Numbers.ThirtySeven);
+        public static FizzBuzzArrayValue ThirtyEight = new(Numbers.ThirtyEight);
+        public static FizzBuzzArrayValue ThirtyNine = new(Numbers.ThirtyNine);
+        public static FizzBuzzArrayValue Forty = new(Numbers.Forty);
+        public static FizzBuzzArrayValue FortyOne = new(Numbers.FortyOne);
+        public static FizzBuzzArrayValue FortyTwo = new(Numbers.FortyTwo);
+        public static FizzBuzzArrayValue FortyThree = new(Numbers.FortyThree);
+        public static FizzBuzzArrayValue FortyFour = new(Numbers.FortyFour);
+        public static FizzBuzzArrayValue FortyFive = new(Numbers.FortyFive);
+        public static FizzBuzzArrayValue FortySix = new(Numbers.FortySix);
+        public static FizzBuzzArrayValue FortySeven = new(Numbers.FortySeven);
+        public static FizzBuzzArrayValue FortyEight = new(Numbers.FortyEight);
+        public static FizzBuzzArrayValue FortyNine = new(Numbers.FortyNine);
+        public static FizzBuzzArrayValue Fifty = new(Numbers.Fifty);
+        public static FizzBuzzArrayValue FiftyOne = new(Numbers.FiftyOne);
+        public static FizzBuzzArrayValue FiftyTwo = new(Numbers.FiftyTwo);
+        public static FizzBuzzArrayValue FiftyThree = new(Numbers.FiftyThree);
+        public static FizzBuzzArrayValue FiftyFour = new(Numbers.FiftyFour);
+        public static FizzBuzzArrayValue FiftyFive = new(Numbers.FiftyFive);
+        public static FizzBuzzArrayValue FiftySix = new(Numbers.FiftySix);
+        public static FizzBuzzArrayValue FiftySeven = new(Numbers.FiftySeven);
+        public static FizzBuzzArrayValue FiftyEight = new(Numbers.FiftyEight);
+        public static FizzBuzzArrayValue FiftyNine = new(Numbers.FiftyNine);
+        public static FizzBuzzArrayValue Sixty = new(Numbers.Sixty);
+        public static FizzBuzzArrayValue SixtyOne = new(Numbers.SixtyOne);
+        public static FizzBuzzArrayValue SixtyTwo = new(Numbers.SixtyTwo);
+        public static FizzBuzzArrayValue SixtyThree = new(Numbers.SixtyThree);
+        public static FizzBuzzArrayValue SixtyFour = new(Numbers.SixtyFour);
+        public static FizzBuzzArrayValue SixtyFive = new(Numbers.SixtyFive);
+        public static FizzBuzzArrayValue SixtySix = new(Numbers.SixtySix);
+        public static FizzBuzzArrayValue SixtySeven = new(Numbers.SixtySeven);
+        public static FizzBuzzArrayValue SixtyEight = new(Numbers.SixtyEight);
+        public static FizzBuzzArrayValue SixtyNine = new(Numbers.SixtyNine);
+        public static FizzBuzzArrayValue Seventy = new(Numbers.Seventy);
+        public static FizzBuzzArrayValue SeventyOne = new(Numbers.SeventyOne);
+        public static FizzBuzzArrayValue SeventyTwo = new(Numbers.SeventyTwo);
+        public static FizzBuzzArrayValue SeventyThree = new(Numbers.SeventyThree);
+        public static FizzBuzzArrayValue SeventyFour = new(Numbers.SeventyFour);
+        public static FizzBuzzArrayValue SeventyFive = new(Numbers.SeventyFive);
+        public static FizzBuzzArrayValue SeventySix = new(Numbers.SeventySix);
+        public static FizzBuzzArrayValue SeventySeven = new(Numbers.SeventySeven);
+        public static FizzBuzzArrayValue SeventyEight = new(Numbers.SeventyEight);
+        public static FizzBuzzArrayValue SeventyNine = new(Numbers.SeventyNine);
+        public static FizzBuzzArrayValue Eighty = new(Numbers.Eighty);
+        public static FizzBuzzArrayValue EightyOne = new(Numbers.EightyOne);
+        public static FizzBuzzArrayValue EightyTwo = new(Numbers.EightyTwo);
+        public static FizzBuzzArrayValue EightyThree = new(Numbers.EightyThree);
+        public static FizzBuzzArrayValue EightyFour = new(Numbers.EightyFour);
+        public static FizzBuzzArrayValue EightyFive = new(Numbers.EightyFive);
+        public static FizzBuzzArrayValue EightySix = new(Numbers.EightySix);
+        public static FizzBuzzArrayValue EightySeven = new(Numbers.EightySeven);
+        public static FizzBuzzArrayValue EightyEight = new(Numbers.EightyEight);
+        public static FizzBuzzArrayValue EightyNine = new(Numbers.EightyNine);
+        public static FizzBuzzArrayValue Ninety = new(Numbers.Ninety);
+        public static FizzBuzzArrayValue NinetyOne = new(Numbers.NinetyOne);
+        public static FizzBuzzArrayValue NinetyTwo = new(Numbers.NinetyTwo);
+        public static FizzBuzzArrayValue NinetyThree = new(Numbers.NinetyThree);
+        public static FizzBuzzArrayValue NinetyFour = new(Numbers.NinetyFour);
+        public static FizzBuzzArrayValue NinetyFive = new(Numbers.NinetyFive);
+        public static FizzBuzzArrayValue NinetySix = new(Numbers.NinetySix);
+        public static FizzBuzzArrayValue NinetySeven = new(Numbers.NinetySeven);
+        public static FizzBuzzArrayValue NinetyEight = new(Numbers.NinetyEight);
+        public static FizzBuzzArrayValue NinetyNine = new(Numbers.NinetyNine);
+        public static FizzBuzzArrayValue OneHundred = new(Numbers.OneHundred);
+    }
     internal static class Numbers
     {
         public const int One = 1;
@@ -128,5 +231,7 @@ internal class LoopEnumerationFactory : ILoopEnumerationFactory
     }
 
 }
+
+internal record FizzBuzzArrayValue(int value);
 
 

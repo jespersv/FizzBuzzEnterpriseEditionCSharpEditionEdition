@@ -1,6 +1,8 @@
-﻿namespace FBEECSEE.Library.interfaces;
+﻿using FBEECSEE.Library.impl;
+
+namespace FBEECSEE.Library.interfaces;
 
 internal interface ILoopLogicFactory
 {
-    Func<IEnumerable<int>, Task> CreateLoop();
+    Func<IEnumerable<FizzBuzzArrayValue>, Task> CreateLoop();
 }

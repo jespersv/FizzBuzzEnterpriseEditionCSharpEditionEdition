@@ -1,3 +1,5 @@
-﻿namespace FBEECSEE.Library.entities;
+﻿using FBEECSEE.Library.impl;
 
-internal record FizzBuzzOperatorLogicMap(Func<int, Func<bool>> ConditionEval, Func<int, Action> Function);
+namespace FBEECSEE.Library.entities;
+
+internal record FizzBuzzOperatorLogicMap(Func<FizzBuzzArrayValue, Func<bool>> ConditionEval, Func<FizzBuzzArrayValue, Action> Function);
