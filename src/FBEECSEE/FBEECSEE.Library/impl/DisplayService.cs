@@ -1,6 +1,4 @@
-﻿using FBEECSEE.Library.interfaces;
-
-namespace FBEECSEE.Library.impl;
+﻿namespace FBEECSEE.Library.impl;
 
 internal class DisplayService : IDisplayService
 {

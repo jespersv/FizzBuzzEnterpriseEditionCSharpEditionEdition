@@ -1,6 +1,4 @@
-﻿using FBEECSEE.Library.entities;
-
-namespace FBEECSEE.Library.impl;
+﻿namespace FBEECSEE.Library.impl;
 
 internal class FizzBuzzLogicDictionary
 {

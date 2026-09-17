@@ -1,6 +1,4 @@
-﻿using FBEECSEE.Library.impl;
-
-namespace FBEECSEE.Library.interfaces;
+﻿namespace FBEECSEE.Library.interfaces;
 
 internal interface IFizzBuzzLogicEvaluationFactory
 {

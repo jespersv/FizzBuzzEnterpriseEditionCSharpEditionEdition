@@ -1,3 +1,4 @@
+using FBEECSEE.Library.entities;
 using FBEECSEE.Library.impl;
 using FBEECSEE.Library.interfaces;
 using Moq;

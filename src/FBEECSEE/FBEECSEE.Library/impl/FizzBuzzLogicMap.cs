@@ -1,5 +1,3 @@
-﻿using FBEECSEE.Library.entities;
-
-namespace FBEECSEE.Library.impl;
+﻿namespace FBEECSEE.Library.impl;
 
 internal record FizzBuzzLogicMap(FizzBuzzEnum Key, EvaluationActionBinding<FizzBuzzArrayValue> Value);

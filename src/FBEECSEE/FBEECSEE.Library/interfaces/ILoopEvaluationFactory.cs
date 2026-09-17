@@ -1,5 +1,4 @@
-﻿using FBEECSEE.Library.impl;
-using FBEECSEE.Library.util.functional;
+﻿using FBEECSEE.Library.util.functional;
 
 namespace FBEECSEE.Library.interfaces;
 
