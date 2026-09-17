@@ -1,5 +1,9 @@
 using FBEECSEE.Library.impl;
+using FBEECSEE.Library.interfaces;
+using FBEECSEE.Library.entities;
+using Moq;
 using NUnit.Framework;
+using System.Linq;
 
 namespace FBEECSEE.Library.Tests.impl;
 
@@ -7,11 +11,16 @@ namespace FBEECSEE.Library.Tests.impl;
 public class LoopEnumerationFactoryTests
 {
     private LoopEnumerationFactory _cut = null!;
+    private Mock<IFizzBuzzCollectionFactory> _fizzBuzzCollectionFactoryMock = null!;
 
     [SetUp]
     public void SetUp()
     {
-        _cut = new LoopEnumerationFactory();
+        _fizzBuzzCollectionFactoryMock = new Mock<IFizzBuzzCollectionFactory>();
+        _fizzBuzzCollectionFactoryMock.Setup(x => x.Create(It.IsAny<IEnumerable<FizzBuzzArrayValue>>()))
+            .Returns((IEnumerable<FizzBuzzArrayValue> vals) => new FizzBuzzCollection(vals));
+
+        _cut = new LoopEnumerationFactory(_fizzBuzzCollectionFactoryMock.Object);
     }
 
     [Test]

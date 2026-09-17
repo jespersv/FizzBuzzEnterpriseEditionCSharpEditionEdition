@@ -2,5 +2,5 @@
 
 internal interface ILoopLogicFactory
 {
-    Func<IEnumerable<FizzBuzzArrayValue>, Task> CreateLoop();
+    Func<FizzBuzzCollection, Task> CreateLoop();
 }

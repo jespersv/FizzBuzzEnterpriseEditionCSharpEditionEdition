@@ -2,5 +2,5 @@
 
 internal interface ILoopLogicService
 {
-    void RunLoop(IEnumerable<FizzBuzzArrayValue> loopEnumeration);
+    void RunLoop(FizzBuzzCollection loopEnumeration);
 }

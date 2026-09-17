@@ -15,6 +15,7 @@ public class Module : Autofac.Module
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicProvider, IFizzBuzzLogicProvider>();
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzLogicEvaluationMapFactory, IFizzBuzzLogicEvaluationMapFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzOperatorLogicMapFactory, IFizzBuzzOperatorLogicMapFactory>();
+        builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzCollectionFactory, IFizzBuzzCollectionFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<FizzBuzzService, IFizzBuzzService>();
         builder.RegisterTypeInstancePerLifetimeScope<LogicOutputFactory, ILogicOutputFactory>();
         builder.RegisterTypeInstancePerLifetimeScope<LoopEnumerationFactory, ILoopEnumerationFactory>();

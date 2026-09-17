@@ -2,6 +2,13 @@
 
 internal class LoopEnumerationFactory : ILoopEnumerationFactory
 {
+    private IFizzBuzzCollectionFactory _fizzBuzzCollectionFactory;
+
+    public LoopEnumerationFactory(IFizzBuzzCollectionFactory fizzBuzzCollectionFactory)
+    {
+        _fizzBuzzCollectionFactory = fizzBuzzCollectionFactory;
+    }
+
     private static FizzBuzzArrayValue[] SeedArray = new[]
     {
         TypedFizzBuzzNumbers.One, TypedFizzBuzzNumbers.Two, TypedFizzBuzzNumbers.Three, TypedFizzBuzzNumbers.Four, TypedFizzBuzzNumbers.Five, TypedFizzBuzzNumbers.Six, TypedFizzBuzzNumbers.Seven, TypedFizzBuzzNumbers.Eight, TypedFizzBuzzNumbers.Nine, TypedFizzBuzzNumbers.Ten,
@@ -19,7 +26,7 @@ internal class LoopEnumerationFactory : ILoopEnumerationFactory
     /// Optimized for top performance.
     /// </summary>
     /// <returns>Enumeration of the fizzbuzz sequence.</returns>
-    public IEnumerable<FizzBuzzArrayValue> CreateLoopEnumeration() => SeedArray.ToArray();
+    public FizzBuzzCollection CreateLoopEnumeration() => _fizzBuzzCollectionFactory.Create(SeedArray.ToArray());
 
     internal static class TypedFizzBuzzNumbers
     {

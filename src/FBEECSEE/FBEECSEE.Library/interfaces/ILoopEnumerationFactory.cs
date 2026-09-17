@@ -2,5 +2,5 @@
 
 internal interface ILoopEnumerationFactory
 {
-    IEnumerable<FizzBuzzArrayValue> CreateLoopEnumeration();
+    FizzBuzzCollection CreateLoopEnumeration();
 }

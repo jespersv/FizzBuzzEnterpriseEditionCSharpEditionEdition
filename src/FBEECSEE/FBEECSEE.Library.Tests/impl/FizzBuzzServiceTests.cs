@@ -25,12 +25,12 @@ public class FizzBuzzServiceTests
     public void Run_CreatesEnumerationAndExecutesLoopLogic()
     {
         var values = new FizzBuzzArrayValue[] { new (1), new(2), new(3) };
-        IEnumerable<FizzBuzzArrayValue>? capturedEnumeration = null;
-        _loopEnumerationFactoryMock.Setup(x => x.CreateLoopEnumeration()).Returns(values);
-        _loopLogicServiceMock.Setup(x => x.RunLoop(It.IsAny<IEnumerable<FizzBuzzArrayValue>>())).Callback<IEnumerable<FizzBuzzArrayValue>>(v => capturedEnumeration = v);
+        FizzBuzzCollection? capturedEnumeration = null;
+        _loopEnumerationFactoryMock.Setup(x => x.CreateLoopEnumeration()).Returns(new FizzBuzzCollection(values));
+        _loopLogicServiceMock.Setup(x => x.RunLoop(It.IsAny<FizzBuzzCollection>())).Callback<FizzBuzzCollection>(v => capturedEnumeration = v);
 
         _cut.Run();
 
-        Assert.That(capturedEnumeration, Is.EqualTo(values));
+        Assert.That(capturedEnumeration?.ToArray(), Is.EqualTo(values));
     }
 }

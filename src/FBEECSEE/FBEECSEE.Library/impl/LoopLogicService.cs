@@ -9,7 +9,7 @@ internal class LoopLogicService : ILoopLogicService
         _loopLogicFactory = loopLogicFactory;
     }
 
-    public void RunLoop(IEnumerable<FizzBuzzArrayValue> loopEnumeration)
+    public void RunLoop(FizzBuzzCollection loopEnumeration)
     {
         var loopLogic = _loopLogicFactory.CreateLoop();
         loopLogic(loopEnumeration);

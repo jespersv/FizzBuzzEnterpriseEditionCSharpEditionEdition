@@ -29,7 +29,7 @@ public class LoopLogicFactoryTests
             .Returns(() => value => If.Tee().If(true, () => processed.Add(value.value)).Else(() => { }).Build());
 
         var loop = _cut.CreateLoop();
-        await loop(new FizzBuzzArrayValue[] { new(1), new(2), new(3) });
+        await loop(new FizzBuzzCollection(new FizzBuzzArrayValue[] { new(1), new(2), new(3) }));
 
         Assert.That(processed, Is.EqualTo(new[] { 1, 2, 3 }));
     }
