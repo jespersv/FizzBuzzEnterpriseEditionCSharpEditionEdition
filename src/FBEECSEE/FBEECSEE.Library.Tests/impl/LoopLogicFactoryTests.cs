@@ -10,13 +10,13 @@ namespace FBEECSEE.Library.Tests.impl;
 [TestFixture]
 public class LoopLogicFactoryTests
 {
-    private Mock<ILoopEvaluationFactory> _loopEvaluationFactoryMock = null!;
+    private Mock<ILogicEvaluationFactory> _loopEvaluationFactoryMock = null!;
     private LoopLogicFactory _cut = null!;
 
     [SetUp]
     public void SetUp()
     {
-        _loopEvaluationFactoryMock = new Mock<ILoopEvaluationFactory>();
+        _loopEvaluationFactoryMock = new Mock<ILogicEvaluationFactory>();
         _cut = new LoopLogicFactory(_loopEvaluationFactoryMock.Object);
     }
 

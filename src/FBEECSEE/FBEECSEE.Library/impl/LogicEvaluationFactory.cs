@@ -2,11 +2,11 @@
 
 namespace FBEECSEE.Library.impl;
 
-internal class LoopEvaluationFactory : ILoopEvaluationFactory
+internal class LogicEvaluationFactory : ILogicEvaluationFactory
 {
     private readonly IFizzBuzzOperatorLogicMapFactory _factory;
 
-    public LoopEvaluationFactory(IFizzBuzzOperatorLogicMapFactory factory)
+    public LogicEvaluationFactory(IFizzBuzzOperatorLogicMapFactory factory)
     {
         _factory = factory;
     }

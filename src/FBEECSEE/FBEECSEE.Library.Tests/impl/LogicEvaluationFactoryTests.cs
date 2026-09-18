@@ -6,16 +6,16 @@ using NUnit.Framework;
 namespace FBEECSEE.Library.Tests.impl;
 
 [TestFixture]
-public class LoopEvaluationFactoryTests
+public class LogicEvaluationFactoryTests
 {
     private Mock<IFizzBuzzOperatorLogicMapFactory> _factoryMock = null!;
-    private LoopEvaluationFactory _cut = null!;
+    private LogicEvaluationFactory _cut = null!;
 
     [SetUp]
     public void SetUp()
     {
         _factoryMock = new Mock<IFizzBuzzOperatorLogicMapFactory>();
-        _cut = new LoopEvaluationFactory(_factoryMock.Object);
+        _cut = new LogicEvaluationFactory(_factoryMock.Object);
     }
 
     [Test]

@@ -2,7 +2,7 @@
 
 namespace FBEECSEE.Library.interfaces;
 
-internal interface ILoopEvaluationFactory
+internal interface ILogicEvaluationFactory
 {
     Func<FizzBuzzArrayValue, IfTee> Create();
 }

@@ -11,7 +11,6 @@ public class HostService
     
     public Task Run()
     {
-        
         _service.Run();
 
         return Task.CompletedTask;
