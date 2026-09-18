@@ -7,4 +7,4 @@ and multiples of both with "FizzBuzz".
 The core logic checks if a number is divisible by 3 and 5.
 */
 
-await FBEECSEE.Library.HostService.Instance.Run();
+await FBEECSEE.Library.HostServiceBuilder.Build().Run();

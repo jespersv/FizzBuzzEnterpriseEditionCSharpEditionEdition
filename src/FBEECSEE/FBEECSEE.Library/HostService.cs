@@ -1,25 +1,18 @@
-﻿using Autofac;
-
-namespace FBEECSEE.Library;
+﻿namespace FBEECSEE.Library;
 
 public class HostService
 {
-    private static readonly IFizzBuzzService Service;
+    private readonly IFizzBuzzService _service;
 
-    public static HostService Instance { get; }
-
-    static HostService()
+    public HostService(IFizzBuzzService service)
     {
-        var builder = new ContainerBuilder();
-        builder.RegisterModule<Module>();
-        var container = builder.Build();
-        Service = container.Resolve<IFizzBuzzService>();
-        Instance = new HostService();
+        _service = service;
     }
-
+    
     public Task Run()
     {
-        Service.Run();
+        
+        _service.Run();
 
         return Task.CompletedTask;
     }
